@@ -1,0 +1,9 @@
+@import "./base.css";
+@import "./layout.css";
+@import "./modules.css";
+@import "./reset.css";
+
+p{
+    color: rgb(255, 30, 0);
+    font-size: 35px;
+}
