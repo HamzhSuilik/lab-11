@@ -1,0 +1,15 @@
+#input_form{
+    display: flex;
+    width: 230px;
+    flex-direction: column;
+    border: 2px red solid;
+
+    padding: 5px;
+}
+
+#input_form>*{
+    width: 90%;
+}
+
+
+
