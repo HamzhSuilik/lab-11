@@ -1,15 +1,79 @@
+a{
+    font-size: 30px;
+    margin: 5px;
+}
+
 #input_form{
     display: flex;
     width: 230px;
     flex-direction: column;
-    border: 2px red solid;
-
-    padding: 5px;
 }
 
 #input_form>*{
     width: 90%;
 }
 
+#container0{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#container1{
+    width: 150px;
+    height: 250px;
+    margin-right: 25px;
+    margin-left: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#container1>img{
+    width: 120px;
+    margin-left: 15px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
 
 
+#container1>h1{
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#main_head{
+    width: 100%;
+    font-size: 35px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: 'Train One', cursive;
+    color: rgb(18, 56, 0);
+}
+
+
+@media screen and (min-width: 700px){
+    #container1{
+        width: 250px;
+        height: 600px;
+        margin-right: 50px;
+        margin-left: 50px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+    #container1>img{
+        width: 200px;
+        margin-left: 25px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    #container1>h1{
+        font-size: 22px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        color: rgb(85, 42, 165);
+    }
+    
+}

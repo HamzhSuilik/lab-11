@@ -1,23 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital@1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Train+One&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <main>
-        <% searchResults.forEach(book=> {%>
-        <section>
-            <img src="<%= book.image %>">
-            <h1><%= book.title %></h1>
-            <h2><%= book.author %></h2>
-            <p><%= book.description %></p>
+        <h1 id="main_head">Search Result</h1>
+        <section id="container0">
+            
+
+            <% searchResults.forEach(book=> {%>
+                <section id="container1">
+                    <img src="<%= book.image %>">
+                    <h1>
+                        <%= book.title %>
+                    </h1>
+                    <h2>
+                        <%= book.author %>
+                    </h2>
+                    <p>
+                        <%= book.description %>
+                    </p>
+                </section>
+                <% }) %>
         </section>
-        <% }) %>
     </main>
-    
+
 </body>
+
 </html>

@@ -31,10 +31,14 @@ app.use(express.static(__dirname + '/public'));
 // Creates a new search to the Google Books API
 app.post('/searches', createSearch);
 
-app.get('/test',(req,res)=>{
+app.get('/searches',(req,res)=>{
     res.render('pages/searches/new.ejs');
 });
 
+
+app.get('/homepage',(req,res)=>{
+    res.render('pages/index.ejs');
+});
 
 app.get('*',nothing);
 function nothing (req,res){

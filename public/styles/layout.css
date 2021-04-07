@@ -1,0 +1,25 @@
+#input_form{
+    border: 2px red solid;
+    padding: 5px;
+}
+
+
+
+#container0{
+    border: 2px blue solid;
+}
+
+#container1{
+    
+    border: 2px red solid;
+    box-shadow: 5px 5px 5px 5px;
+    background-color: azure;
+}
+
+
+
+#container1>h1{
+    font-style: italic;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: brown;
+}
