@@ -1,23 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital@1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Train+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/styles.css">
 </head>
+
 <body>
+    <header>
+        <%- include('../layout/header.ejs') %>
+    </header>
     <main>
-        <% searchResults.forEach(book=> {%>
-        <section>
-            <img src="<%= book.image %>">
-            <h1><%= book.title %></h1>
-            <h2><%= book.author %></h2>
-            <p><%= book.description %></p>
+        <h1 id="main_head">Search Result</h1>
+        <section id="container0">
+            <% searchResults.forEach(book=> {%>
+                <section id="container1">
+                    <img src="<%= book.image %>">
+                    <h1>
+                        <%= book.title.slice(0,40) %>
+                    </h1>
+                    <h2>
+                        <%= book.author %>
+                    </h2>
+                    <p>
+                        <%= book.description.slice(0,100) %>
+                    </p>
+                    <form id="select_book" name="select_book" action="/select" method="post">
+
+                        <input hidden name="title" type="text" value="<%- book.title %>">
+                        <input hidden name="description_book" type="text" value="<%- book.description %>">
+                        <input hidden name="author" type="text" value="<%- book.author %>">
+                        <input hidden name="image_book" type="text" value="<%- book.image %>">
+                        <input hidden name="isbn" type="text" value="<%- book.isbn %>">
+                        <input hidden name="shelf" type="text" value="<%- book.shelf %>">
+
+
+                        <button id='btn' type="submit">Select this book</button>
+                    </form>
+
+                </section>
+                <% }) %>
         </section>
-        <% }) %>
     </main>
-    
+
 </body>
+
 </html>

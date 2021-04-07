@@ -1,0 +1,20 @@
+#header0{
+    margin-top: 20px;
+}
+
+#header0>li{
+    display:inline;
+    margin-left: 50px;
+    font-size: 30px;
+}
+
+
+nav>*{
+    float: left;
+}
+
+nav>img{
+    margin-left: 10px;
+}
+
+
