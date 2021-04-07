@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,34 +8,38 @@
     <title>Document</title>
     <link rel="stylesheet" href="/styles/styles.css">
 </head>
+
 <body>
+    <header>
+        <%- include('../layout/header.ejs') %>
+    </header>
     <main>
         <h1>Search by Title or Author</h1>
-        <form id="input_form" name="title" action="/searches" method="post">
-            <label for="title">search</label>
+        <section id="search_box">
+            <form id="input_form" name="title" action="/searches" method="post">
+                <label for="title">search</label>
+                <input name="search_text" type="text" placeholder="Enter a title or author" required>
+                <label class="container">
+                    <label for="intitle">
+                        <input type="radio" name="radio" value="intitle">
+                        <span>Title</span>
+                    </label>
 
-            <input name="search_text" type="text" placeholder="Enter a title or author" required>
-            
-            
-            <label class="container">
-                <label for="intitle">
-                    <input type="radio" name="radio" value="intitle">
-                    <span>Title</span>
+                    <label for="inauthor">
+                        <input type="radio" name="radio" value="inauthor">
+                        <span>author</span>
+                    </label>
+
+
                 </label>
-                
-                <label for="inauthor">
-                    <input type="radio" name="radio" value="inauthor">
-                    <span>author</span>
-                </label>
-                
-                
-            </label>
-         
-            <button type="submit">submit !</button>
-        </form>
-        
-       
+
+                <button type="submit">submit !</button>
+            </form>
+        </section>
+
+
     </main>
 
 </body>
+
 </html>
