@@ -21,7 +21,7 @@
 
 /*** button *****/
 
-#btn{
+.btn{
     font-size: 20px; 
     border: 2px rgb(47, 0, 255) dashed;
     background-color: aquamarine;
@@ -29,6 +29,41 @@
     margin-left: 50px;
 }
 
-#btn:hover{
+.btn:hover{
+    background-color: red;
+}
+
+#update{
+    border: 2px blue solid;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 300px;
+
+    border: 2px red solid;
+    box-shadow: 5px 5px 5px 5px;
+    background-color: azure;
+
+    margin-left: 200px;
+}
+
+#update>*{
+    width: 90%;
+    margin-top: 5px;
+    margin-bottom: 5x;
+}
+
+#update>button{
+    font-size: 20px; 
+    border: 2px rgb(47, 0, 255) dashed;
+    background-color: aquamarine;
+    border-radius: 10px;
+
+    width: 90%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#update>button:hover{
     background-color: red;
 }

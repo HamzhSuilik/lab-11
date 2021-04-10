@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital@1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Train+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/styles.css">
+</head>
+<body>
+    <header>
+        <%- include('./layout/header.ejs') %>
+    </header>
+    <main>
+        <main>
+            <h1 id="edite">Update Book Data</h1>
+
+
+            <form id="update" name="update" action="/task/update/<%= id %>?q=PUT" method="post">
+
+                
+                <input name="title" type="text" placeholder="Enter a title" value="<%= title %>">
+                <input name="author" type="text" placeholder="Enter author name" value="<%= author %>">
+                <input name="image" type="text" placeholder="Enter Image URL" value="<%= image_book %>">
+                <input name="isbn" type="text" placeholder="Enter a isbn" value="<%= isbn %>">
+                <input name="shelf" type="text" placeholder="Enter a shelf" value="<%= shelf %>">
+
+                <input name="description_book" type="text" placeholder="Enter description" value="<%= description_book %>">
+
+                <!-- <textarea name="description_book" cols="40" type="text" rows="5" placeholder="Enter a description" value="***">---</textarea> -->
+
+                <button type="submit">Update</button>
+            </form>
+
+        </main>
+    </main>
+    <footer>
+        <%- include('./layout/footer.ejs') %>
+    </footer>
+</body>
+</html>
