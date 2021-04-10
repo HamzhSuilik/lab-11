@@ -13,10 +13,19 @@ const cors = require('cors');
 const superagent = require('superagent');
 const pg = require('pg');
 const { pipe } = require('superagent');
+const { query } = require('express');
 const client = new pg.Client(DATABASE_URL);
+const method_override = require('method-override');
 
 const app = express();
 app.use(cors());
+// *********************************
+//app.use(methodOverride('_method'));
+app.use(method_override('q'));
+
+// ***********************************
+
+
 
 // Application Middleware
 app.use(express.urlencoded());
@@ -43,7 +52,7 @@ app.get('/', (req, res) => {
     client.query(sqlQuery).then(result => {
         res.render('pages/index.ejs', { array: result.rows });
     }).catch(error => {
-        res.render('pages/index.ejs', { text: error });
+        res.render('pages/error.ejs', { error: error });
     })
 });
 
@@ -54,26 +63,87 @@ app.get('/homepage', (req, res) => {
         sql_data = result.rows;
         res.render('pages/index.ejs', { array: result.rows });
     }).catch(error => {
-        res.render('pages/index.ejs', { text: error });
+        res.render('pages/error.ejs', { error: error });
     })
 });
 
 app.get('/details', details_page);
 
-app.get('*', nothing);
-function nothing(req, res) {
-    res.status(404).send('you sent Invalid request!!');
-}
+
+// ----------------- update and delete ------------------------
+app.post('/update', update_data);
+
+app.put('/task/update/:task_id',update);
+
+app.delete('/task/delete/:task_id',delete_item);
+
+
 
 // --------- Functions ---------
+function delete_item(req,res){
+    const taskId = req.params.task_id*1;
+
+    // SQL 
+
+    const safeValues = [taskId];
+    const deleteQuery = 'DELETE FROM saved_book WHERE id=$1';
+
+    client.query(deleteQuery,safeValues).then(result => {
+        
+        const sqlQuery = `SELECT * FROM saved_book;`;
+        client.query(sqlQuery).then(result => {
+            res.render('pages/index.ejs', { array: result.rows });
+        }).catch(error => {
+            res.render('pages/error.ejs', { error: error });
+        })
+
+    }).catch(error => {
+        res.render('pages/error.ejs', { error: error });
+    })
+    
+}
+
+function update_data(req,res){
+    const {id,book_index,title,description_book,author,image_book,isbn,shelf} = req.body;
+    res.render('pages/edit.ejs', { book_index: book_index , title:title,description_book:description_book,author:author,image_book:image_book,isbn:isbn,shelf:shelf,id:id });
+}
+
+function update(req,res){
+    const taskId = req.params.task_id*1;
+   
+    const {title,description_book,author,image_book,isbn,shelf} = req.body;
+
+    // SQL 
+
+    const safeValues = [title, description_book,author,image_book,isbn,shelf,taskId];
+
+    const updateQuery = 'UPDATE saved_book SET title=$1, description_book=$2, author=$3, image_book=$4, isbn=$5, shelf=$6 WHERE id=$7;';
+
+    client.query(updateQuery,safeValues).then(result => {
+        
+        const sqlQuery = `SELECT * FROM saved_book;`;
+        client.query(sqlQuery).then(result => {
+            res.render('pages/index.ejs', { array: result.rows });
+        }).catch(error => {
+            res.render('pages/error.ejs', { error: error });
+        })
+        
+    }).catch(error => {
+        res.render('pages/error.ejs', { error: error });
+    })
+}
+
+
+
 function details_page(req, res) {
     const book_index = req.query.book_index;
+    const id = req.query.id;
 
     const sqlQuery = `SELECT * FROM saved_book;`;
     client.query(sqlQuery).then(result => {
-        res.render('pages/books/detail.ejs', { book_index: book_index, array: result.rows });
+        res.render('pages/books/detail.ejs', { book_index: book_index, array: result.rows ,id:id });
     }).catch(error => {
-        res.render('pages/index.ejs', { text: error });
+        res.render('pages/error.ejs', { error: error });
     })
 
 
@@ -95,9 +165,9 @@ function add_to_database(req,res){
         const sqlQuery = `SELECT * FROM saved_book;`;
         client.query(sqlQuery).then(result => {
             const book_index = result.rows.length*1-1;
-            res.render('pages/books/detail.ejs', { book_index: book_index, array: result.rows });
+            res.render('pages/books/detail.ejs', { book_index: book_index, array: result.rows , id:book_index });
         }).catch(error => {
-            res.render('pages/index.ejs', { text: error });
+            res.render('pages/error.ejs', { error: error });
         })
 
 
@@ -139,15 +209,17 @@ function Books(data) {
     this.image = data.volumeInfo.imageLinks.thumbnail ? data.volumeInfo.imageLinks.thumbnail : 'https://cdn.picpng.com/book/book-view-30965.png';
     this.isbn = data.isbn;
     this.shelf = data.shelf;
+    this.shelf=data.id;
 }
 
-function Books2(data) {
-    this.title = data.title;
-    this.description = data.description_book;
-    this.author = data.author;
-    this.image = data.image_book;
-    this.isbn = data.isbn;
-    this.shelf = data.shelf;
+
+//**********************************
+
+// Any request
+
+app.get('*', nothing);
+function nothing(req, res) {
+    res.status(404).send('you sent Invalid request!!');
 }
 
 // Listen to the port

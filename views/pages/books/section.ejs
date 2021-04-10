@@ -17,5 +17,25 @@
         <h2>shelf :
             <%= array[book_index].shelf %>
         </h2>
+       
+        <form id="form1" name="form1" action="/update" method="post">
+
+            <input hidden name="title" type="text" value="<%= array[book_index].title %>">
+            <input hidden name="author" type="text" value="<%= array[book_index].author %>">
+
+            <input hidden name="description_book" type="text" value="<%= array[book_index].description_book %>">
+            <input hidden name="image_book" type="text" value="<%= array[book_index].image_book %>">
+            <input hidden name="isbn" type="text" value="<%= array[book_index].isbn %>">
+            <input hidden name="shelf" type="text" value="<%= array[book_index].shelf %>">
+            <input hidden name="id" type="text" value="<%= id %>">
+
+            <button class='btn' type="submit">Update Details</button>
+        </form>
+
+        <form id="form1" name="form1" action="/task/delete/<%= id %>?q=Delete" method="post">
+            <button class='btn' type="submit">Delete this Book</button>
+        </form>
+        
+        <!-- <a style="text-decoration: none; padding: 5px;" class='btn' href="./update">Update Details</a> -->
     </section>
 </section>
